@@ -8,14 +8,27 @@ const searchFood = () => {
     const searchText = searchField.value;
     searchField.value = '';
 
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
-    fetch(url)
-        .then(response => response.json())
-        .then(data => DisplaySearchResult(data.meals));
+    if (searchText == '') {
+        // please enter some text
+    }
+    else {
+        const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => DisplaySearchResult(data.meals));
+    }
+
+
 }
 
 const DisplaySearchResult = (meals) => {
+    if (meals.length == 0) {
+        // display something
+    }
     const searchResult = document.getElementById('search-result');
+    // searchResult.innerHTML = '';
+    searchResult.textContent = '';
+
     meals.forEach(meal => {
         console.log(meal);
         const div = document.createElement('div');
@@ -42,7 +55,8 @@ const loadMealDetail = mealID => {
 }
 
 const displayMealDetail = meal => {
-    const searchResult = document.getElementById('meal-details');
+    const mealDetail = document.getElementById('meal-details');
+    mealDetail.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
@@ -50,7 +64,8 @@ const displayMealDetail = meal => {
     <div class="card-body">
         <h5 class="card-title">${meal.strMeal}</h5>
         <p class="card-text">${meal.strInstructions.slice(0, 250)}</p>
-        <a href="${meal.Youtube}" class="btn btn-primary">Go somewhere</a>
+        <a href="${meal.Youtube}" class="btn btn-primary">Go for video</a>
     </div>
-    `
+    `;
+    mealDetail.appendChild(div);
 }
