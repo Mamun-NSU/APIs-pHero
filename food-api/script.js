@@ -17,7 +17,7 @@ const searchFood = () => {
             .then(response => response.json())
             .then(data => DisplaySearchResult(data.meals));
     }
-
+    // DisplaySearchResult(data.meals));
 
 }
 
